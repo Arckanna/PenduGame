@@ -1,6 +1,6 @@
 import random
 
-mots_liste= "sangle Zombi Croix Rouge Catastrophe Gym Chatouiller Lucifer Ardent Librairie"
+mots_liste= "sangle zombi croix rouge catastrophe gym chatouiller lucifer ardent librairie"
 tableau_mots = mots_liste.split(" ")
 
 index_mots = random.randint(0,len(tableau_mots)-1)
@@ -17,8 +17,12 @@ print(f"Mot à trouver : {jeu_information['mot_a_trouver']}  Nombre d'essais : {
 while True:
     lettre = input('Entrer une lettre : ')
     if lettre in jeu_information['mot_choisi'] and lettre not in jeu_information['mot_a_trouver']:
-        pass
-    
+        lettre_mot_a_trouver=list(jeu_information['mot_a_trouver'])
+        for index, lettre_test in enumerate(jeu_information['mot_choisi']):
+            if lettre_test == lettre:
+                lettre_mot_a_trouver[index] = lettre
+        jeu_information['mot_a_trouver'] = ''.join(lettre_mot_a_trouver)        
+        print(f"Mot à trouver : {jeu_information['mot_a_trouver']} ")    
     elif lettre not in jeu_information['mot_choisi']:
         jeu_information['vie']-=1
         if jeu_information['vie'] > 1:
@@ -27,6 +31,8 @@ while True:
             print("Plus qu'un essai")
         else:
             print("Allez je vous accorde un dernier essai")
+    
+    print(f"Mot à trouver : {jeu_information['mot_a_trouver']} ")
 
     if jeu_information['vie'] < 0:
         print(f"Perdu le mot etait : {jeu_information['mot_choisi']}")
